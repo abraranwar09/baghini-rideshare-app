@@ -1,0 +1,2578 @@
+swagger: '2.0'
+info:
+  title: baghini
+  version: 1.0.0
+  contact:
+    email: no-reply@baghini.bubble.is
+    url: 'https://baghiniinc.com'
+host: baghiniinc.com
+basePath: /api/1.1
+schemes:
+  - https
+consumes:
+  - application/json
+paths:
+  /wf/auth_user_signup:
+    post:
+      description: Triggers the workflow auth_user_signup
+      parameters:
+        - name: auth_user_signup request body
+          in: body
+          description: Body of the POST request
+          schema:
+            $ref: '#/definitions/auth_user_signupBody'
+      tags:
+        - Workflow
+      responses:
+        '200':
+          description: Workflow response
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: Outcome of the workflow
+              response:
+                type: object
+                properties:
+                  unique_id:
+                    type: string
+                  created_date:
+                    type: string
+                  user-type:
+                    type: string
+                  user_id:
+                    type: string
+                  token:
+                    type: string
+                  expires:
+                    type: number
+                    format: float
+        '400':
+          description: Workflow failure
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: Outcome of the workflow
+              message:
+                type: string
+                description: Error message for the workflow
+        '500':
+          description: Internal bug. Please file a bug report at bubble.is/bug_report with the request that triggers this bug
+          schema:
+            type: object
+            properties:
+              code:
+                type: string
+                description: Error code
+              message:
+                type: string
+                description: Error message for the operation
+      security: []
+  /wf/auth_rider_signup:
+    post:
+      description: Triggers the workflow auth_rider_signup
+      parameters:
+        - name: auth_rider_signup request body
+          in: body
+          description: Body of the POST request
+          schema:
+            $ref: '#/definitions/auth_rider_signupBody'
+      tags:
+        - Workflow
+      responses:
+        '200':
+          description: Workflow response
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: Outcome of the workflow
+              response:
+                type: object
+                properties:
+                  unique_id:
+                    type: string
+                  created_date:
+                    type: string
+                  user-type:
+                    type: string
+                  user_id:
+                    type: string
+                  token:
+                    type: string
+                  expires:
+                    type: number
+                    format: float
+        '400':
+          description: Workflow failure
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: Outcome of the workflow
+              message:
+                type: string
+                description: Error message for the workflow
+        '500':
+          description: Internal bug. Please file a bug report at bubble.is/bug_report with the request that triggers this bug
+          schema:
+            type: object
+            properties:
+              code:
+                type: string
+                description: Error code
+              message:
+                type: string
+                description: Error message for the operation
+      security: []
+  /wf/create_trip_request:
+    post:
+      description: Triggers the workflow create_trip_request
+      parameters:
+        - name: create_trip_request request body
+          in: body
+          description: Body of the POST request
+          schema:
+            $ref: '#/definitions/create_trip_requestBody'
+      tags:
+        - Workflow
+      responses:
+        '200':
+          description: Workflow response
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: Outcome of the workflow
+              response:
+                type: object
+                properties: {}
+        '400':
+          description: Workflow failure
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: Outcome of the workflow
+              message:
+                type: string
+                description: Error message for the workflow
+        '500':
+          description: Internal bug. Please file a bug report at bubble.is/bug_report with the request that triggers this bug
+          schema:
+            type: object
+            properties:
+              code:
+                type: string
+                description: Error code
+              message:
+                type: string
+                description: Error message for the operation
+      security: []
+  '/obj/listings/{UniqueID}':
+    get:
+      description: Retrieve a thing of type listings by unique ID
+      tags:
+        - Data
+      parameters:
+        - name: UniqueID
+          in: path
+          description: Unique ID of the listings to retrieve
+          type: string
+          required: true
+      responses:
+        '200':
+          description: Retrieved listings
+          schema:
+            type: object
+            properties:
+              response:
+                $ref: '#/definitions/listings'
+        '400':
+          description: Database retrieval failure
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: Error code
+              message:
+                type: string
+                description: Error message for the operation
+        '500':
+          description: Internal bug. Please file a bug report at bubble.is/bug_report with the request that triggers this bug
+          schema:
+            type: object
+            properties:
+              code:
+                type: string
+                description: Error code
+              message:
+                type: string
+                description: Error message for the operation
+    patch:
+      description: Modifies a thing of type listings by unique ID
+      tags:
+        - Data
+      parameters:
+        - name: UniqueID
+          in: path
+          description: Unique ID of the listings to modify
+          type: string
+          required: true
+        - name: listings request body
+          in: body
+          description: Body of the PATCH request
+          schema:
+            $ref: '#/definitions/listingsBody'
+      responses:
+        '204':
+          description: Modified listings
+        '400':
+          description: Database retrieval failure
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: Error code
+              message:
+                type: string
+                description: Error message for the operation
+        '500':
+          description: Internal bug. Please file a bug report at bubble.is/bug_report with the request that triggers this bug
+          schema:
+            type: object
+            properties:
+              code:
+                type: string
+                description: Error code
+              message:
+                type: string
+                description: Error message for the operation
+    put:
+      description: Replaces a thing of type listings by unique ID
+      tags:
+        - Data
+      parameters:
+        - name: UniqueID
+          in: path
+          description: Unique ID of the listings to replace
+          type: string
+          required: true
+        - name: listings request body
+          in: body
+          description: Body of the PUT request
+          schema:
+            $ref: '#/definitions/listingsBody'
+      responses:
+        '204':
+          description: Replaced listings
+        '400':
+          description: Database retrieval failure
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: Error code
+              message:
+                type: string
+                description: Error message for the operation
+        '500':
+          description: Internal bug. Please file a bug report at bubble.is/bug_report with the request that triggers this bug
+          schema:
+            type: object
+            properties:
+              code:
+                type: string
+                description: Error code
+              message:
+                type: string
+                description: Error message for the operation
+    delete:
+      description: Deletes a thing of type listings by unique ID
+      tags:
+        - Data
+      parameters:
+        - name: UniqueID
+          in: path
+          description: Unique ID of the listings to delete
+          type: string
+          required: true
+      responses:
+        '204':
+          description: Replaced listings
+        '400':
+          description: Database retrieval failure
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: Error code
+              message:
+                type: string
+                description: Error message for the operation
+        '500':
+          description: Internal bug. Please file a bug report at bubble.is/bug_report with the request that triggers this bug
+          schema:
+            type: object
+            properties:
+              code:
+                type: string
+                description: Error code
+              message:
+                type: string
+                description: Error message for the operation
+  /obj/listings:
+    get:
+      description: Retrieve a list of things of type listings with some optional search constraints. Retreives 100 items at most at once.
+      tags:
+        - Data
+      parameters:
+        - name: limit
+          in: query
+          description: Number of items to fetch (maximum is 100)
+          type: integer
+          format: int32
+          default: 50
+        - name: cursor
+          in: query
+          description: Position to start from in the list
+          type: integer
+          format: int32
+          default: 0
+        - name: sort_field
+          in: query
+          description: Field to sort the list on
+          type: string
+        - name: descending
+          in: query
+          description: 'Sorting type: descending or ascending'
+          type: boolean
+        - name: constraints
+          in: query
+          description: 'Search constraints, stringified array as described [here](https://bubble.is/reference#API.get_api.search_call.search_constraints)'
+          type: string
+      responses:
+        '200':
+          description: Retrieved list of listingss
+          schema:
+            type: object
+            properties:
+              response:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/definitions/listings'
+                  cursor:
+                    type: number
+                    format: float
+                    description: Rank of the first item in the list
+                  count:
+                    type: number
+                    format: float
+                    description: Number of items in the current response. It is the minimum between the actual length of the list and the sent limit (or 100 if you did not specify a limit).
+                  remaining:
+                    type: number
+                    format: float
+                    description: Number of remaining items after the current response. Useful to fetch more items.
+        '400':
+          description: Database retrieval failure
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: Error code
+              message:
+                type: string
+                description: Error message for the operation
+        '500':
+          description: Internal bug. Please file a bug report at bubble.is/bug_report with the request that triggers this bug
+          schema:
+            type: object
+            properties:
+              code:
+                type: string
+                description: Error code
+              message:
+                type: string
+                description: Error message for the operation
+    post:
+      description: Create a new thing of type listings
+      tags:
+        - Data
+      parameters:
+        - name: listings request body
+          in: body
+          description: Body of the POST request
+          schema:
+            $ref: '#/definitions/listingsBody'
+      responses:
+        '201':
+          description: Created one thing of type listings
+          schema:
+            type: object
+            properties:
+              response:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Success status of the operation
+                  id:
+                    type: string
+                    description: Unique id of the newly created object
+        '400':
+          description: Database retrieval failure
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: Error code
+              message:
+                type: string
+                description: Error message for the operation
+        '500':
+          description: Internal bug. Please file a bug report at bubble.is/bug_report with the request that triggers this bug
+          schema:
+            type: object
+            properties:
+              code:
+                type: string
+                description: Error code
+              message:
+                type: string
+                description: Error message for the operation
+  '/obj/coupon/{UniqueID}':
+    get:
+      description: Retrieve a thing of type coupon by unique ID
+      tags:
+        - Data
+      parameters:
+        - name: UniqueID
+          in: path
+          description: Unique ID of the coupon to retrieve
+          type: string
+          required: true
+      responses:
+        '200':
+          description: Retrieved coupon
+          schema:
+            type: object
+            properties:
+              response:
+                $ref: '#/definitions/coupon'
+        '400':
+          description: Database retrieval failure
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: Error code
+              message:
+                type: string
+                description: Error message for the operation
+        '500':
+          description: Internal bug. Please file a bug report at bubble.is/bug_report with the request that triggers this bug
+          schema:
+            type: object
+            properties:
+              code:
+                type: string
+                description: Error code
+              message:
+                type: string
+                description: Error message for the operation
+    patch:
+      description: Modifies a thing of type coupon by unique ID
+      tags:
+        - Data
+      parameters:
+        - name: UniqueID
+          in: path
+          description: Unique ID of the coupon to modify
+          type: string
+          required: true
+        - name: coupon request body
+          in: body
+          description: Body of the PATCH request
+          schema:
+            $ref: '#/definitions/couponBody'
+      responses:
+        '204':
+          description: Modified coupon
+        '400':
+          description: Database retrieval failure
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: Error code
+              message:
+                type: string
+                description: Error message for the operation
+        '500':
+          description: Internal bug. Please file a bug report at bubble.is/bug_report with the request that triggers this bug
+          schema:
+            type: object
+            properties:
+              code:
+                type: string
+                description: Error code
+              message:
+                type: string
+                description: Error message for the operation
+    put:
+      description: Replaces a thing of type coupon by unique ID
+      tags:
+        - Data
+      parameters:
+        - name: UniqueID
+          in: path
+          description: Unique ID of the coupon to replace
+          type: string
+          required: true
+        - name: coupon request body
+          in: body
+          description: Body of the PUT request
+          schema:
+            $ref: '#/definitions/couponBody'
+      responses:
+        '204':
+          description: Replaced coupon
+        '400':
+          description: Database retrieval failure
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: Error code
+              message:
+                type: string
+                description: Error message for the operation
+        '500':
+          description: Internal bug. Please file a bug report at bubble.is/bug_report with the request that triggers this bug
+          schema:
+            type: object
+            properties:
+              code:
+                type: string
+                description: Error code
+              message:
+                type: string
+                description: Error message for the operation
+    delete:
+      description: Deletes a thing of type coupon by unique ID
+      tags:
+        - Data
+      parameters:
+        - name: UniqueID
+          in: path
+          description: Unique ID of the coupon to delete
+          type: string
+          required: true
+      responses:
+        '204':
+          description: Replaced coupon
+        '400':
+          description: Database retrieval failure
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: Error code
+              message:
+                type: string
+                description: Error message for the operation
+        '500':
+          description: Internal bug. Please file a bug report at bubble.is/bug_report with the request that triggers this bug
+          schema:
+            type: object
+            properties:
+              code:
+                type: string
+                description: Error code
+              message:
+                type: string
+                description: Error message for the operation
+  /obj/coupon:
+    get:
+      description: Retrieve a list of things of type coupon with some optional search constraints. Retreives 100 items at most at once.
+      tags:
+        - Data
+      parameters:
+        - name: limit
+          in: query
+          description: Number of items to fetch (maximum is 100)
+          type: integer
+          format: int32
+          default: 50
+        - name: cursor
+          in: query
+          description: Position to start from in the list
+          type: integer
+          format: int32
+          default: 0
+        - name: sort_field
+          in: query
+          description: Field to sort the list on
+          type: string
+        - name: descending
+          in: query
+          description: 'Sorting type: descending or ascending'
+          type: boolean
+        - name: constraints
+          in: query
+          description: 'Search constraints, stringified array as described [here](https://bubble.is/reference#API.get_api.search_call.search_constraints)'
+          type: string
+      responses:
+        '200':
+          description: Retrieved list of coupons
+          schema:
+            type: object
+            properties:
+              response:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/definitions/coupon'
+                  cursor:
+                    type: number
+                    format: float
+                    description: Rank of the first item in the list
+                  count:
+                    type: number
+                    format: float
+                    description: Number of items in the current response. It is the minimum between the actual length of the list and the sent limit (or 100 if you did not specify a limit).
+                  remaining:
+                    type: number
+                    format: float
+                    description: Number of remaining items after the current response. Useful to fetch more items.
+        '400':
+          description: Database retrieval failure
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: Error code
+              message:
+                type: string
+                description: Error message for the operation
+        '500':
+          description: Internal bug. Please file a bug report at bubble.is/bug_report with the request that triggers this bug
+          schema:
+            type: object
+            properties:
+              code:
+                type: string
+                description: Error code
+              message:
+                type: string
+                description: Error message for the operation
+    post:
+      description: Create a new thing of type coupon
+      tags:
+        - Data
+      parameters:
+        - name: coupon request body
+          in: body
+          description: Body of the POST request
+          schema:
+            $ref: '#/definitions/couponBody'
+      responses:
+        '201':
+          description: Created one thing of type coupon
+          schema:
+            type: object
+            properties:
+              response:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Success status of the operation
+                  id:
+                    type: string
+                    description: Unique id of the newly created object
+        '400':
+          description: Database retrieval failure
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: Error code
+              message:
+                type: string
+                description: Error message for the operation
+        '500':
+          description: Internal bug. Please file a bug report at bubble.is/bug_report with the request that triggers this bug
+          schema:
+            type: object
+            properties:
+              code:
+                type: string
+                description: Error code
+              message:
+                type: string
+                description: Error message for the operation
+  '/obj/trip_maker/{UniqueID}':
+    get:
+      description: Retrieve a thing of type trip_maker by unique ID
+      tags:
+        - Data
+      parameters:
+        - name: UniqueID
+          in: path
+          description: Unique ID of the trip_maker to retrieve
+          type: string
+          required: true
+      responses:
+        '200':
+          description: Retrieved trip_maker
+          schema:
+            type: object
+            properties:
+              response:
+                $ref: '#/definitions/trip_maker'
+        '400':
+          description: Database retrieval failure
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: Error code
+              message:
+                type: string
+                description: Error message for the operation
+        '500':
+          description: Internal bug. Please file a bug report at bubble.is/bug_report with the request that triggers this bug
+          schema:
+            type: object
+            properties:
+              code:
+                type: string
+                description: Error code
+              message:
+                type: string
+                description: Error message for the operation
+    patch:
+      description: Modifies a thing of type trip_maker by unique ID
+      tags:
+        - Data
+      parameters:
+        - name: UniqueID
+          in: path
+          description: Unique ID of the trip_maker to modify
+          type: string
+          required: true
+        - name: trip_maker request body
+          in: body
+          description: Body of the PATCH request
+          schema:
+            $ref: '#/definitions/trip_makerBody'
+      responses:
+        '204':
+          description: Modified trip_maker
+        '400':
+          description: Database retrieval failure
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: Error code
+              message:
+                type: string
+                description: Error message for the operation
+        '500':
+          description: Internal bug. Please file a bug report at bubble.is/bug_report with the request that triggers this bug
+          schema:
+            type: object
+            properties:
+              code:
+                type: string
+                description: Error code
+              message:
+                type: string
+                description: Error message for the operation
+    put:
+      description: Replaces a thing of type trip_maker by unique ID
+      tags:
+        - Data
+      parameters:
+        - name: UniqueID
+          in: path
+          description: Unique ID of the trip_maker to replace
+          type: string
+          required: true
+        - name: trip_maker request body
+          in: body
+          description: Body of the PUT request
+          schema:
+            $ref: '#/definitions/trip_makerBody'
+      responses:
+        '204':
+          description: Replaced trip_maker
+        '400':
+          description: Database retrieval failure
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: Error code
+              message:
+                type: string
+                description: Error message for the operation
+        '500':
+          description: Internal bug. Please file a bug report at bubble.is/bug_report with the request that triggers this bug
+          schema:
+            type: object
+            properties:
+              code:
+                type: string
+                description: Error code
+              message:
+                type: string
+                description: Error message for the operation
+    delete:
+      description: Deletes a thing of type trip_maker by unique ID
+      tags:
+        - Data
+      parameters:
+        - name: UniqueID
+          in: path
+          description: Unique ID of the trip_maker to delete
+          type: string
+          required: true
+      responses:
+        '204':
+          description: Replaced trip_maker
+        '400':
+          description: Database retrieval failure
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: Error code
+              message:
+                type: string
+                description: Error message for the operation
+        '500':
+          description: Internal bug. Please file a bug report at bubble.is/bug_report with the request that triggers this bug
+          schema:
+            type: object
+            properties:
+              code:
+                type: string
+                description: Error code
+              message:
+                type: string
+                description: Error message for the operation
+  /obj/trip_maker:
+    get:
+      description: Retrieve a list of things of type trip_maker with some optional search constraints. Retreives 100 items at most at once.
+      tags:
+        - Data
+      parameters:
+        - name: limit
+          in: query
+          description: Number of items to fetch (maximum is 100)
+          type: integer
+          format: int32
+          default: 50
+        - name: cursor
+          in: query
+          description: Position to start from in the list
+          type: integer
+          format: int32
+          default: 0
+        - name: sort_field
+          in: query
+          description: Field to sort the list on
+          type: string
+        - name: descending
+          in: query
+          description: 'Sorting type: descending or ascending'
+          type: boolean
+        - name: constraints
+          in: query
+          description: 'Search constraints, stringified array as described [here](https://bubble.is/reference#API.get_api.search_call.search_constraints)'
+          type: string
+      responses:
+        '200':
+          description: Retrieved list of trip_makers
+          schema:
+            type: object
+            properties:
+              response:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/definitions/trip_maker'
+                  cursor:
+                    type: number
+                    format: float
+                    description: Rank of the first item in the list
+                  count:
+                    type: number
+                    format: float
+                    description: Number of items in the current response. It is the minimum between the actual length of the list and the sent limit (or 100 if you did not specify a limit).
+                  remaining:
+                    type: number
+                    format: float
+                    description: Number of remaining items after the current response. Useful to fetch more items.
+        '400':
+          description: Database retrieval failure
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: Error code
+              message:
+                type: string
+                description: Error message for the operation
+        '500':
+          description: Internal bug. Please file a bug report at bubble.is/bug_report with the request that triggers this bug
+          schema:
+            type: object
+            properties:
+              code:
+                type: string
+                description: Error code
+              message:
+                type: string
+                description: Error message for the operation
+    post:
+      description: Create a new thing of type trip_maker
+      tags:
+        - Data
+      parameters:
+        - name: trip_maker request body
+          in: body
+          description: Body of the POST request
+          schema:
+            $ref: '#/definitions/trip_makerBody'
+      responses:
+        '201':
+          description: Created one thing of type trip_maker
+          schema:
+            type: object
+            properties:
+              response:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Success status of the operation
+                  id:
+                    type: string
+                    description: Unique id of the newly created object
+        '400':
+          description: Database retrieval failure
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: Error code
+              message:
+                type: string
+                description: Error message for the operation
+        '500':
+          description: Internal bug. Please file a bug report at bubble.is/bug_report with the request that triggers this bug
+          schema:
+            type: object
+            properties:
+              code:
+                type: string
+                description: Error code
+              message:
+                type: string
+                description: Error message for the operation
+  '/obj/listing/{UniqueID}':
+    get:
+      description: Retrieve a thing of type listing by unique ID
+      tags:
+        - Data
+      parameters:
+        - name: UniqueID
+          in: path
+          description: Unique ID of the listing to retrieve
+          type: string
+          required: true
+      responses:
+        '200':
+          description: Retrieved listing
+          schema:
+            type: object
+            properties:
+              response:
+                $ref: '#/definitions/listing'
+        '400':
+          description: Database retrieval failure
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: Error code
+              message:
+                type: string
+                description: Error message for the operation
+        '500':
+          description: Internal bug. Please file a bug report at bubble.is/bug_report with the request that triggers this bug
+          schema:
+            type: object
+            properties:
+              code:
+                type: string
+                description: Error code
+              message:
+                type: string
+                description: Error message for the operation
+    patch:
+      description: Modifies a thing of type listing by unique ID
+      tags:
+        - Data
+      parameters:
+        - name: UniqueID
+          in: path
+          description: Unique ID of the listing to modify
+          type: string
+          required: true
+        - name: listing request body
+          in: body
+          description: Body of the PATCH request
+          schema:
+            $ref: '#/definitions/listingBody'
+      responses:
+        '204':
+          description: Modified listing
+        '400':
+          description: Database retrieval failure
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: Error code
+              message:
+                type: string
+                description: Error message for the operation
+        '500':
+          description: Internal bug. Please file a bug report at bubble.is/bug_report with the request that triggers this bug
+          schema:
+            type: object
+            properties:
+              code:
+                type: string
+                description: Error code
+              message:
+                type: string
+                description: Error message for the operation
+    put:
+      description: Replaces a thing of type listing by unique ID
+      tags:
+        - Data
+      parameters:
+        - name: UniqueID
+          in: path
+          description: Unique ID of the listing to replace
+          type: string
+          required: true
+        - name: listing request body
+          in: body
+          description: Body of the PUT request
+          schema:
+            $ref: '#/definitions/listingBody'
+      responses:
+        '204':
+          description: Replaced listing
+        '400':
+          description: Database retrieval failure
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: Error code
+              message:
+                type: string
+                description: Error message for the operation
+        '500':
+          description: Internal bug. Please file a bug report at bubble.is/bug_report with the request that triggers this bug
+          schema:
+            type: object
+            properties:
+              code:
+                type: string
+                description: Error code
+              message:
+                type: string
+                description: Error message for the operation
+    delete:
+      description: Deletes a thing of type listing by unique ID
+      tags:
+        - Data
+      parameters:
+        - name: UniqueID
+          in: path
+          description: Unique ID of the listing to delete
+          type: string
+          required: true
+      responses:
+        '204':
+          description: Replaced listing
+        '400':
+          description: Database retrieval failure
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: Error code
+              message:
+                type: string
+                description: Error message for the operation
+        '500':
+          description: Internal bug. Please file a bug report at bubble.is/bug_report with the request that triggers this bug
+          schema:
+            type: object
+            properties:
+              code:
+                type: string
+                description: Error code
+              message:
+                type: string
+                description: Error message for the operation
+  /obj/listing:
+    get:
+      description: Retrieve a list of things of type listing with some optional search constraints. Retreives 100 items at most at once.
+      tags:
+        - Data
+      parameters:
+        - name: limit
+          in: query
+          description: Number of items to fetch (maximum is 100)
+          type: integer
+          format: int32
+          default: 50
+        - name: cursor
+          in: query
+          description: Position to start from in the list
+          type: integer
+          format: int32
+          default: 0
+        - name: sort_field
+          in: query
+          description: Field to sort the list on
+          type: string
+        - name: descending
+          in: query
+          description: 'Sorting type: descending or ascending'
+          type: boolean
+        - name: constraints
+          in: query
+          description: 'Search constraints, stringified array as described [here](https://bubble.is/reference#API.get_api.search_call.search_constraints)'
+          type: string
+      responses:
+        '200':
+          description: Retrieved list of listings
+          schema:
+            type: object
+            properties:
+              response:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/definitions/listing'
+                  cursor:
+                    type: number
+                    format: float
+                    description: Rank of the first item in the list
+                  count:
+                    type: number
+                    format: float
+                    description: Number of items in the current response. It is the minimum between the actual length of the list and the sent limit (or 100 if you did not specify a limit).
+                  remaining:
+                    type: number
+                    format: float
+                    description: Number of remaining items after the current response. Useful to fetch more items.
+        '400':
+          description: Database retrieval failure
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: Error code
+              message:
+                type: string
+                description: Error message for the operation
+        '500':
+          description: Internal bug. Please file a bug report at bubble.is/bug_report with the request that triggers this bug
+          schema:
+            type: object
+            properties:
+              code:
+                type: string
+                description: Error code
+              message:
+                type: string
+                description: Error message for the operation
+    post:
+      description: Create a new thing of type listing
+      tags:
+        - Data
+      parameters:
+        - name: listing request body
+          in: body
+          description: Body of the POST request
+          schema:
+            $ref: '#/definitions/listingBody'
+      responses:
+        '201':
+          description: Created one thing of type listing
+          schema:
+            type: object
+            properties:
+              response:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Success status of the operation
+                  id:
+                    type: string
+                    description: Unique id of the newly created object
+        '400':
+          description: Database retrieval failure
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: Error code
+              message:
+                type: string
+                description: Error message for the operation
+        '500':
+          description: Internal bug. Please file a bug report at bubble.is/bug_report with the request that triggers this bug
+          schema:
+            type: object
+            properties:
+              code:
+                type: string
+                description: Error code
+              message:
+                type: string
+                description: Error message for the operation
+  '/obj/pricingmodel/{UniqueID}':
+    get:
+      description: Retrieve a thing of type pricingmodel by unique ID
+      tags:
+        - Data
+      parameters:
+        - name: UniqueID
+          in: path
+          description: Unique ID of the pricingmodel to retrieve
+          type: string
+          required: true
+      responses:
+        '200':
+          description: Retrieved pricingmodel
+          schema:
+            type: object
+            properties:
+              response:
+                $ref: '#/definitions/pricingmodel'
+        '400':
+          description: Database retrieval failure
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: Error code
+              message:
+                type: string
+                description: Error message for the operation
+        '500':
+          description: Internal bug. Please file a bug report at bubble.is/bug_report with the request that triggers this bug
+          schema:
+            type: object
+            properties:
+              code:
+                type: string
+                description: Error code
+              message:
+                type: string
+                description: Error message for the operation
+    patch:
+      description: Modifies a thing of type pricingmodel by unique ID
+      tags:
+        - Data
+      parameters:
+        - name: UniqueID
+          in: path
+          description: Unique ID of the pricingmodel to modify
+          type: string
+          required: true
+        - name: pricingmodel request body
+          in: body
+          description: Body of the PATCH request
+          schema:
+            $ref: '#/definitions/pricingmodelBody'
+      responses:
+        '204':
+          description: Modified pricingmodel
+        '400':
+          description: Database retrieval failure
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: Error code
+              message:
+                type: string
+                description: Error message for the operation
+        '500':
+          description: Internal bug. Please file a bug report at bubble.is/bug_report with the request that triggers this bug
+          schema:
+            type: object
+            properties:
+              code:
+                type: string
+                description: Error code
+              message:
+                type: string
+                description: Error message for the operation
+    put:
+      description: Replaces a thing of type pricingmodel by unique ID
+      tags:
+        - Data
+      parameters:
+        - name: UniqueID
+          in: path
+          description: Unique ID of the pricingmodel to replace
+          type: string
+          required: true
+        - name: pricingmodel request body
+          in: body
+          description: Body of the PUT request
+          schema:
+            $ref: '#/definitions/pricingmodelBody'
+      responses:
+        '204':
+          description: Replaced pricingmodel
+        '400':
+          description: Database retrieval failure
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: Error code
+              message:
+                type: string
+                description: Error message for the operation
+        '500':
+          description: Internal bug. Please file a bug report at bubble.is/bug_report with the request that triggers this bug
+          schema:
+            type: object
+            properties:
+              code:
+                type: string
+                description: Error code
+              message:
+                type: string
+                description: Error message for the operation
+    delete:
+      description: Deletes a thing of type pricingmodel by unique ID
+      tags:
+        - Data
+      parameters:
+        - name: UniqueID
+          in: path
+          description: Unique ID of the pricingmodel to delete
+          type: string
+          required: true
+      responses:
+        '204':
+          description: Replaced pricingmodel
+        '400':
+          description: Database retrieval failure
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: Error code
+              message:
+                type: string
+                description: Error message for the operation
+        '500':
+          description: Internal bug. Please file a bug report at bubble.is/bug_report with the request that triggers this bug
+          schema:
+            type: object
+            properties:
+              code:
+                type: string
+                description: Error code
+              message:
+                type: string
+                description: Error message for the operation
+  /obj/pricingmodel:
+    get:
+      description: Retrieve a list of things of type pricingmodel with some optional search constraints. Retreives 100 items at most at once.
+      tags:
+        - Data
+      parameters:
+        - name: limit
+          in: query
+          description: Number of items to fetch (maximum is 100)
+          type: integer
+          format: int32
+          default: 50
+        - name: cursor
+          in: query
+          description: Position to start from in the list
+          type: integer
+          format: int32
+          default: 0
+        - name: sort_field
+          in: query
+          description: Field to sort the list on
+          type: string
+        - name: descending
+          in: query
+          description: 'Sorting type: descending or ascending'
+          type: boolean
+        - name: constraints
+          in: query
+          description: 'Search constraints, stringified array as described [here](https://bubble.is/reference#API.get_api.search_call.search_constraints)'
+          type: string
+      responses:
+        '200':
+          description: Retrieved list of pricingmodels
+          schema:
+            type: object
+            properties:
+              response:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/definitions/pricingmodel'
+                  cursor:
+                    type: number
+                    format: float
+                    description: Rank of the first item in the list
+                  count:
+                    type: number
+                    format: float
+                    description: Number of items in the current response. It is the minimum between the actual length of the list and the sent limit (or 100 if you did not specify a limit).
+                  remaining:
+                    type: number
+                    format: float
+                    description: Number of remaining items after the current response. Useful to fetch more items.
+        '400':
+          description: Database retrieval failure
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: Error code
+              message:
+                type: string
+                description: Error message for the operation
+        '500':
+          description: Internal bug. Please file a bug report at bubble.is/bug_report with the request that triggers this bug
+          schema:
+            type: object
+            properties:
+              code:
+                type: string
+                description: Error code
+              message:
+                type: string
+                description: Error message for the operation
+    post:
+      description: Create a new thing of type pricingmodel
+      tags:
+        - Data
+      parameters:
+        - name: pricingmodel request body
+          in: body
+          description: Body of the POST request
+          schema:
+            $ref: '#/definitions/pricingmodelBody'
+      responses:
+        '201':
+          description: Created one thing of type pricingmodel
+          schema:
+            type: object
+            properties:
+              response:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Success status of the operation
+                  id:
+                    type: string
+                    description: Unique id of the newly created object
+        '400':
+          description: Database retrieval failure
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: Error code
+              message:
+                type: string
+                description: Error message for the operation
+        '500':
+          description: Internal bug. Please file a bug report at bubble.is/bug_report with the request that triggers this bug
+          schema:
+            type: object
+            properties:
+              code:
+                type: string
+                description: Error code
+              message:
+                type: string
+                description: Error message for the operation
+  '/obj/user/{UniqueID}':
+    get:
+      description: Retrieve a thing of type user by unique ID
+      tags:
+        - Data
+      parameters:
+        - name: UniqueID
+          in: path
+          description: Unique ID of the user to retrieve
+          type: string
+          required: true
+      responses:
+        '200':
+          description: Retrieved user
+          schema:
+            type: object
+            properties:
+              response:
+                $ref: '#/definitions/user'
+        '400':
+          description: Database retrieval failure
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: Error code
+              message:
+                type: string
+                description: Error message for the operation
+        '500':
+          description: Internal bug. Please file a bug report at bubble.is/bug_report with the request that triggers this bug
+          schema:
+            type: object
+            properties:
+              code:
+                type: string
+                description: Error code
+              message:
+                type: string
+                description: Error message for the operation
+    patch:
+      description: Modifies a thing of type user by unique ID
+      tags:
+        - Data
+      parameters:
+        - name: UniqueID
+          in: path
+          description: Unique ID of the user to modify
+          type: string
+          required: true
+        - name: user request body
+          in: body
+          description: Body of the PATCH request
+          schema:
+            $ref: '#/definitions/userBody'
+      responses:
+        '204':
+          description: Modified user
+        '400':
+          description: Database retrieval failure
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: Error code
+              message:
+                type: string
+                description: Error message for the operation
+        '500':
+          description: Internal bug. Please file a bug report at bubble.is/bug_report with the request that triggers this bug
+          schema:
+            type: object
+            properties:
+              code:
+                type: string
+                description: Error code
+              message:
+                type: string
+                description: Error message for the operation
+    put:
+      description: Replaces a thing of type user by unique ID
+      tags:
+        - Data
+      parameters:
+        - name: UniqueID
+          in: path
+          description: Unique ID of the user to replace
+          type: string
+          required: true
+        - name: user request body
+          in: body
+          description: Body of the PUT request
+          schema:
+            $ref: '#/definitions/userBody'
+      responses:
+        '204':
+          description: Replaced user
+        '400':
+          description: Database retrieval failure
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: Error code
+              message:
+                type: string
+                description: Error message for the operation
+        '500':
+          description: Internal bug. Please file a bug report at bubble.is/bug_report with the request that triggers this bug
+          schema:
+            type: object
+            properties:
+              code:
+                type: string
+                description: Error code
+              message:
+                type: string
+                description: Error message for the operation
+    delete:
+      description: Deletes a thing of type user by unique ID
+      tags:
+        - Data
+      parameters:
+        - name: UniqueID
+          in: path
+          description: Unique ID of the user to delete
+          type: string
+          required: true
+      responses:
+        '204':
+          description: Replaced user
+        '400':
+          description: Database retrieval failure
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: Error code
+              message:
+                type: string
+                description: Error message for the operation
+        '500':
+          description: Internal bug. Please file a bug report at bubble.is/bug_report with the request that triggers this bug
+          schema:
+            type: object
+            properties:
+              code:
+                type: string
+                description: Error code
+              message:
+                type: string
+                description: Error message for the operation
+  /obj/user:
+    get:
+      description: Retrieve a list of things of type user with some optional search constraints. Retreives 100 items at most at once.
+      tags:
+        - Data
+      parameters:
+        - name: limit
+          in: query
+          description: Number of items to fetch (maximum is 100)
+          type: integer
+          format: int32
+          default: 50
+        - name: cursor
+          in: query
+          description: Position to start from in the list
+          type: integer
+          format: int32
+          default: 0
+        - name: sort_field
+          in: query
+          description: Field to sort the list on
+          type: string
+        - name: descending
+          in: query
+          description: 'Sorting type: descending or ascending'
+          type: boolean
+        - name: constraints
+          in: query
+          description: 'Search constraints, stringified array as described [here](https://bubble.is/reference#API.get_api.search_call.search_constraints)'
+          type: string
+      responses:
+        '200':
+          description: Retrieved list of users
+          schema:
+            type: object
+            properties:
+              response:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/definitions/user'
+                  cursor:
+                    type: number
+                    format: float
+                    description: Rank of the first item in the list
+                  count:
+                    type: number
+                    format: float
+                    description: Number of items in the current response. It is the minimum between the actual length of the list and the sent limit (or 100 if you did not specify a limit).
+                  remaining:
+                    type: number
+                    format: float
+                    description: Number of remaining items after the current response. Useful to fetch more items.
+        '400':
+          description: Database retrieval failure
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: Error code
+              message:
+                type: string
+                description: Error message for the operation
+        '500':
+          description: Internal bug. Please file a bug report at bubble.is/bug_report with the request that triggers this bug
+          schema:
+            type: object
+            properties:
+              code:
+                type: string
+                description: Error code
+              message:
+                type: string
+                description: Error message for the operation
+    post:
+      description: Create a new thing of type user
+      tags:
+        - Data
+      parameters:
+        - name: user request body
+          in: body
+          description: Body of the POST request
+          schema:
+            $ref: '#/definitions/userBody'
+      responses:
+        '201':
+          description: Created one thing of type user
+          schema:
+            type: object
+            properties:
+              response:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Success status of the operation
+                  id:
+                    type: string
+                    description: Unique id of the newly created object
+        '400':
+          description: Database retrieval failure
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: Error code
+              message:
+                type: string
+                description: Error message for the operation
+        '500':
+          description: Internal bug. Please file a bug report at bubble.is/bug_report with the request that triggers this bug
+          schema:
+            type: object
+            properties:
+              code:
+                type: string
+                description: Error code
+              message:
+                type: string
+                description: Error message for the operation
+definitions:
+  listings:
+    type: object
+    properties:
+      Baghini Earnings:
+        type: number
+        format: float
+        description: '''Baghini Earnings'' field of the current Listings'
+      Base_fare:
+        type: string
+        description: '''Base_fare'' field of the current Listings'
+      Date:
+        type: string
+        format: date
+        description: '''Date'' field of the current Listings'
+      Drop off:
+        $ref: '#/definitions/GeographicAddress'
+      issue_report_trigger:
+        type: boolean
+        description: '''issue_report_trigger'' field of the current Listings'
+      User:
+        type: string
+        description: '''User'' field of the current Listings (''user'' represented by a unique ID)'
+      Pickup:
+        $ref: '#/definitions/GeographicAddress'
+      Pickup Time:
+        type: string
+        format: date
+        description: '''Pickup Time'' field of the current Listings'
+      RIde_time:
+        type: number
+        format: float
+        description: '''RIde_time'' field of the current Listings'
+      Sub-Total:
+        type: number
+        format: float
+        description: '''Sub-Total'' field of the current Listings'
+      Total:
+        type: number
+        format: float
+        description: '''Total'' field of the current Listings'
+      trip_started:
+        type: boolean
+        description: '''trip_started'' field of the current Listings'
+      Created Date:
+        type: string
+        format: date
+        description: '''Created Date'' field of the current Listings'
+      Modified Date:
+        type: string
+        format: date
+        description: '''Modified Date'' field of the current Listings'
+      Created By:
+        type: string
+        description: '''Created By'' field of the current Listings (''user'' represented by a unique ID)'
+      _id:
+        type: string
+        description: '''unique ID'' field of the current Listings'
+  GeographicAddress:
+    type: object
+    properties:
+      address:
+        type: string
+        description: Formatted address
+      lat:
+        type: number
+        format: float
+        description: Address latitude
+      lng:
+        type: number
+        format: float
+        description: Address longitude
+  coupon:
+    type: object
+    properties:
+      'Amount ':
+        type: number
+        format: float
+        description: '''Amount '' field of the current Coupon'
+      coupon_code:
+        type: string
+        description: '''coupon_code'' field of the current Coupon'
+      end_date:
+        type: string
+        format: date
+        description: '''end_date'' field of the current Coupon'
+      max-cap:
+        type: number
+        format: float
+        description: '''max-cap'' field of the current Coupon'
+      start_date:
+        type: string
+        format: date
+        description: '''start_date'' field of the current Coupon'
+      usage_count:
+        type: number
+        format: float
+        description: '''usage_count'' field of the current Coupon'
+      Created Date:
+        type: string
+        format: date
+        description: '''Created Date'' field of the current Coupon'
+      Modified Date:
+        type: string
+        format: date
+        description: '''Modified Date'' field of the current Coupon'
+      Created By:
+        type: string
+        description: '''Created By'' field of the current Coupon (''user'' represented by a unique ID)'
+      _id:
+        type: string
+        description: '''unique ID'' field of the current Coupon'
+  trip_maker:
+    type: object
+    properties:
+      assigned_rider:
+        type: string
+        description: '''assigned_rider'' field of the current trip_maker (''user'' represented by a unique ID)'
+      baghine_price_est:
+        type: number
+        format: float
+        description: '''baghine_price_est'' field of the current trip_maker'
+      days:
+        type: string
+        description: '''days'' field of the current trip_maker'
+      end_date:
+        type: string
+        format: date
+        description: '''end_date'' field of the current trip_maker'
+      final_route:
+        $ref: '#/definitions/api.apiconnector2.bTHMI.bTHMJ.body.routes'
+      locations:
+        type: array
+        description: '''locations'' field of the current trip_maker'
+        items:
+          $ref: '#/definitions/GeographicAddress'
+      'Requested by ':
+        type: string
+        description: '''Requested by '' field of the current trip_maker (''user'' represented by a unique ID)'
+      Start Date/Time:
+        type: string
+        format: date
+        description: '''Start Date/Time'' field of the current trip_maker'
+      Created Date:
+        type: string
+        format: date
+        description: '''Created Date'' field of the current trip_maker'
+      Modified Date:
+        type: string
+        format: date
+        description: '''Modified Date'' field of the current trip_maker'
+      Created By:
+        type: string
+        description: '''Created By'' field of the current trip_maker (''user'' represented by a unique ID)'
+      _id:
+        type: string
+        description: '''unique ID'' field of the current trip_maker'
+  api.apiconnector2.bTHMI.bTHMJ.steps:
+    type: object
+    properties:
+      _api_c2_distance.text:
+        type: string
+        description: distance text
+      _api_c2_distance.value:
+        type: number
+        format: float
+        description: distance value
+      _api_c2_duration.text:
+        type: string
+        description: duration text
+      _api_c2_duration.value:
+        type: number
+        format: float
+        description: duration value
+      _api_c2_end_location.lat:
+        type: number
+        format: float
+        description: end_location lat
+      _api_c2_end_location.lng:
+        type: number
+        format: float
+        description: end_location lng
+      _api_c2_html_instructions:
+        type: string
+        description: html_instructions
+      _api_c2_polyline.points:
+        type: string
+        description: polyline points
+      _api_c2_start_location.lat:
+        type: number
+        format: float
+        description: start_location lat
+      _api_c2_start_location.lng:
+        type: number
+        format: float
+        description: start_location lng
+      _api_c2_travel_mode:
+        type: string
+        description: travel_mode
+      _api_c2_maneuver:
+        type: string
+        description: maneuver
+  api.apiconnector2.bTHMI.bTHMJ.legs:
+    type: object
+    properties:
+      _api_c2_distance.text:
+        type: string
+        description: distance text
+      _api_c2_distance.value:
+        type: number
+        format: float
+        description: distance value
+      _api_c2_duration.text:
+        type: string
+        description: duration text
+      _api_c2_duration.value:
+        type: number
+        format: float
+        description: duration value
+      _api_c2_end_address:
+        type: string
+        description: end_address
+      _api_c2_end_location.lat:
+        type: number
+        format: float
+        description: end_location lat
+      _api_c2_end_location.lng:
+        type: number
+        format: float
+        description: end_location lng
+      _api_c2_start_address:
+        type: string
+        description: start_address
+      _api_c2_start_location.lat:
+        type: number
+        format: float
+        description: start_location lat
+      _api_c2_start_location.lng:
+        type: number
+        format: float
+        description: start_location lng
+      _api_c2_steps:
+        type: array
+        description: steps
+        items:
+          $ref: '#/definitions/api.apiconnector2.bTHMI.bTHMJ.steps'
+  api.apiconnector2.bTHMI.bTHMJ.body.routes:
+    type: object
+    properties:
+      _api_c2_bounds.northeast.lat:
+        type: number
+        format: float
+        description: bounds northeast lat
+      _api_c2_bounds.northeast.lng:
+        type: number
+        format: float
+        description: bounds northeast lng
+      _api_c2_bounds.southwest.lat:
+        type: number
+        format: float
+        description: bounds southwest lat
+      _api_c2_bounds.southwest.lng:
+        type: number
+        format: float
+        description: bounds southwest lng
+      _api_c2_copyrights:
+        type: string
+        description: copyrights
+      _api_c2_legs:
+        type: array
+        description: legs
+        items:
+          $ref: '#/definitions/api.apiconnector2.bTHMI.bTHMJ.legs'
+      _api_c2_overview_polyline.points:
+        type: string
+        description: overview_polyline points
+      _api_c2_summary:
+        type: string
+        description: summary
+  listing:
+    type: object
+    properties:
+      days:
+        type: array
+        description: '''days'' field of the current Listing'
+        items:
+          type: string
+      Departure Time:
+        type: string
+        description: '''Departure Time'' field of the current Listing'
+      dropoff:
+        $ref: '#/definitions/GeographicAddress'
+      Name:
+        type: string
+        description: '''Name'' field of the current Listing'
+      pickup:
+        $ref: '#/definitions/GeographicAddress'
+      Return Time:
+        type: string
+        format: date
+        description: '''Return Time'' field of the current Listing'
+      round_trip:
+        type: boolean
+        description: '''round_trip'' field of the current Listing'
+      total:
+        type: number
+        format: float
+        description: '''total'' field of the current Listing'
+      via:
+        $ref: '#/definitions/GeographicAddress'
+      Created Date:
+        type: string
+        format: date
+        description: '''Created Date'' field of the current Listing'
+      Modified Date:
+        type: string
+        format: date
+        description: '''Modified Date'' field of the current Listing'
+      Created By:
+        type: string
+        description: '''Created By'' field of the current Listing (''user'' represented by a unique ID)'
+      _id:
+        type: string
+        description: '''unique ID'' field of the current Listing'
+  pricingmodel:
+    type: object
+    properties:
+      Base Fare:
+        type: number
+        format: float
+        description: '''Base Fare'' field of the current Pricing Model'
+      Price Per Kilometer:
+        type: number
+        format: float
+        description: '''Price Per Kilometer'' field of the current Pricing Model'
+      Price Per Minute:
+        type: number
+        format: float
+        description: '''Price Per Minute'' field of the current Pricing Model'
+      'Total Distance ':
+        type: number
+        format: float
+        description: '''Total Distance '' field of the current Pricing Model'
+      Waiting Time:
+        type: number
+        format: float
+        description: '''Waiting Time'' field of the current Pricing Model'
+      Created Date:
+        type: string
+        format: date
+        description: '''Created Date'' field of the current Pricing Model'
+      Modified Date:
+        type: string
+        format: date
+        description: '''Modified Date'' field of the current Pricing Model'
+      Created By:
+        type: string
+        description: '''Created By'' field of the current Pricing Model (''user'' represented by a unique ID)'
+      _id:
+        type: string
+        description: '''unique ID'' field of the current Pricing Model'
+  user:
+    type: object
+    properties:
+      active:
+        type: boolean
+        description: '''active'' field of the current User'
+      available:
+        type: boolean
+        description: '''available'' field of the current User'
+      avatar:
+        type: string
+        description: '''avatar'' field of the current User'
+      blue_book_image:
+        type: string
+        description: '''blue_book_image'' field of the current User'
+      current_location:
+        $ref: '#/definitions/GeographicAddress'
+      driver_license_image:
+        type: string
+        description: '''driver_license_image'' field of the current User'
+      home_address:
+        $ref: '#/definitions/GeographicAddress'
+      icon:
+        type: string
+        description: '''icon'' field of the current User'
+      last_checked_booking:
+        type: string
+        description: '''last_checked_booking'' field of the current User (''listings'' represented by a unique ID)'
+      name:
+        type: string
+        description: '''name'' field of the current User'
+      nid/pass:
+        type: number
+        format: float
+        description: '''nid/pass'' field of the current User'
+      on_ride:
+        type: boolean
+        description: '''on_ride'' field of the current User'
+      onboard_1:
+        type: boolean
+        description: '''onboard_1'' field of the current User'
+      onboard_2:
+        type: boolean
+        description: '''onboard_2'' field of the current User'
+      phone_number:
+        type: number
+        format: float
+        description: '''phone_number'' field of the current User'
+      plate_metro_city_digits:
+        type: number
+        format: float
+        description: '''plate_metro_city_digits'' field of the current User'
+      plate_metro_city:
+        type: string
+        description: '''plate_metro_city'' field of the current User'
+      plate_metro_letter:
+        type: string
+        description: '''plate_metro_letter'' field of the current User'
+      plate_metro_vehicle_id:
+        type: number
+        format: float
+        description: '''plate_metro_vehicle_id'' field of the current User'
+      status_number:
+        type: number
+        format: float
+        description: '''status_number'' field of the current User'
+      status:
+        type: string
+        description: '''status'' field of the current User'
+      type:
+        type: string
+        description: '''type'' field of the current User'
+      vehicle_image:
+        type: string
+        description: '''vehicle_image'' field of the current User'
+      Created Date:
+        type: string
+        format: date
+        description: '''Created Date'' field of the current User'
+      Modified Date:
+        type: string
+        format: date
+        description: '''Modified Date'' field of the current User'
+      _id:
+        type: string
+        description: '''unique ID'' field of the current User'
+  auth_user_signupBody:
+    type: object
+    properties:
+      id:
+        type: string
+      pass:
+        type: string
+    required:
+      - id
+      - pass
+  auth_rider_signupBody:
+    type: object
+    properties:
+      id:
+        type: string
+      pass:
+        type: string
+    required:
+      - id
+      - pass
+  create_trip_requestBody:
+    type: object
+    properties:
+      days_list:
+        type: array
+        items:
+          type: string
+      req_by:
+        type: string
+    required:
+      - days_list
+      - req_by
+  listingsBody:
+    type: object
+    properties:
+      Baghini Earnings:
+        type: number
+        format: float
+        description: '''Baghini Earnings'' field of the current Listings'
+      Base_fare:
+        type: string
+        description: '''Base_fare'' field of the current Listings'
+      Date:
+        type: string
+        format: date
+        description: '''Date'' field of the current Listings'
+      Drop off:
+        $ref: '#/definitions/GeographicAddress'
+      issue_report_trigger:
+        type: boolean
+        description: '''issue_report_trigger'' field of the current Listings'
+      User:
+        type: string
+        description: '''User'' field of the current Listings (''user'' represented by a unique ID)'
+      Pickup:
+        $ref: '#/definitions/GeographicAddress'
+      Pickup Time:
+        type: string
+        format: date
+        description: '''Pickup Time'' field of the current Listings'
+      RIde_time:
+        type: number
+        format: float
+        description: '''RIde_time'' field of the current Listings'
+      Sub-Total:
+        type: number
+        format: float
+        description: '''Sub-Total'' field of the current Listings'
+      Total:
+        type: number
+        format: float
+        description: '''Total'' field of the current Listings'
+      trip_started:
+        type: boolean
+        description: '''trip_started'' field of the current Listings'
+  couponBody:
+    type: object
+    properties:
+      'Amount ':
+        type: number
+        format: float
+        description: '''Amount '' field of the current Coupon'
+      coupon_code:
+        type: string
+        description: '''coupon_code'' field of the current Coupon'
+      end_date:
+        type: string
+        format: date
+        description: '''end_date'' field of the current Coupon'
+      max-cap:
+        type: number
+        format: float
+        description: '''max-cap'' field of the current Coupon'
+      start_date:
+        type: string
+        format: date
+        description: '''start_date'' field of the current Coupon'
+      usage_count:
+        type: number
+        format: float
+        description: '''usage_count'' field of the current Coupon'
+  trip_makerBody:
+    type: object
+    properties:
+      assigned_rider:
+        type: string
+        description: '''assigned_rider'' field of the current trip_maker (''user'' represented by a unique ID)'
+      baghine_price_est:
+        type: number
+        format: float
+        description: '''baghine_price_est'' field of the current trip_maker'
+      days:
+        type: string
+        description: '''days'' field of the current trip_maker'
+      end_date:
+        type: string
+        format: date
+        description: '''end_date'' field of the current trip_maker'
+      final_route:
+        $ref: '#/definitions/api.apiconnector2.bTHMI.bTHMJ.body.routes'
+      locations:
+        type: array
+        description: '''locations'' field of the current trip_maker'
+        items:
+          $ref: '#/definitions/GeographicAddress'
+      'Requested by ':
+        type: string
+        description: '''Requested by '' field of the current trip_maker (''user'' represented by a unique ID)'
+      Start Date/Time:
+        type: string
+        format: date
+        description: '''Start Date/Time'' field of the current trip_maker'
+  listingBody:
+    type: object
+    properties:
+      days:
+        type: array
+        description: '''days'' field of the current Listing'
+        items:
+          type: string
+      Departure Time:
+        type: string
+        description: '''Departure Time'' field of the current Listing'
+      dropoff:
+        $ref: '#/definitions/GeographicAddress'
+      Name:
+        type: string
+        description: '''Name'' field of the current Listing'
+      pickup:
+        $ref: '#/definitions/GeographicAddress'
+      Return Time:
+        type: string
+        format: date
+        description: '''Return Time'' field of the current Listing'
+      round_trip:
+        type: boolean
+        description: '''round_trip'' field of the current Listing'
+      total:
+        type: number
+        format: float
+        description: '''total'' field of the current Listing'
+      via:
+        $ref: '#/definitions/GeographicAddress'
+  pricingmodelBody:
+    type: object
+    properties:
+      Base Fare:
+        type: number
+        format: float
+        description: '''Base Fare'' field of the current Pricing Model'
+      Price Per Kilometer:
+        type: number
+        format: float
+        description: '''Price Per Kilometer'' field of the current Pricing Model'
+      Price Per Minute:
+        type: number
+        format: float
+        description: '''Price Per Minute'' field of the current Pricing Model'
+      'Total Distance ':
+        type: number
+        format: float
+        description: '''Total Distance '' field of the current Pricing Model'
+      Waiting Time:
+        type: number
+        format: float
+        description: '''Waiting Time'' field of the current Pricing Model'
+  userBody:
+    type: object
+    properties:
+      active:
+        type: boolean
+        description: '''active'' field of the current User'
+      available:
+        type: boolean
+        description: '''available'' field of the current User'
+      avatar:
+        type: string
+        description: '''avatar'' field of the current User'
+      blue_book_image:
+        type: string
+        description: '''blue_book_image'' field of the current User'
+      current_location:
+        $ref: '#/definitions/GeographicAddress'
+      driver_license_image:
+        type: string
+        description: '''driver_license_image'' field of the current User'
+      home_address:
+        $ref: '#/definitions/GeographicAddress'
+      icon:
+        type: string
+        description: '''icon'' field of the current User'
+      last_checked_booking:
+        type: string
+        description: '''last_checked_booking'' field of the current User (''listings'' represented by a unique ID)'
+      name:
+        type: string
+        description: '''name'' field of the current User'
+      nid/pass:
+        type: number
+        format: float
+        description: '''nid/pass'' field of the current User'
+      on_ride:
+        type: boolean
+        description: '''on_ride'' field of the current User'
+      onboard_1:
+        type: boolean
+        description: '''onboard_1'' field of the current User'
+      onboard_2:
+        type: boolean
+        description: '''onboard_2'' field of the current User'
+      phone_number:
+        type: number
+        format: float
+        description: '''phone_number'' field of the current User'
+      plate_metro_city_digits:
+        type: number
+        format: float
+        description: '''plate_metro_city_digits'' field of the current User'
+      plate_metro_city:
+        type: string
+        description: '''plate_metro_city'' field of the current User'
+      plate_metro_letter:
+        type: string
+        description: '''plate_metro_letter'' field of the current User'
+      plate_metro_vehicle_id:
+        type: number
+        format: float
+        description: '''plate_metro_vehicle_id'' field of the current User'
+      status_number:
+        type: number
+        format: float
+        description: '''status_number'' field of the current User'
+      status:
+        type: string
+        description: '''status'' field of the current User'
+      type:
+        type: string
+        description: '''type'' field of the current User'
+      vehicle_image:
+        type: string
+        description: '''vehicle_image'' field of the current User'
+tags:
+  - name: Workflow
+    description: Use this to trigger a workflow
+  - name: Data
+    description: 'Use this to fetch, modify and delete data'
+securityDefinitions:
+  api_token:
+    type: apiKey
+    name: api_token
+    in: query
+security:
+  - api_token: []

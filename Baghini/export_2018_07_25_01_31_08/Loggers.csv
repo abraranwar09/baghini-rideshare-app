@@ -1,0 +1,2 @@
+"level(STRING(36))","logFormat(STRING(36))","name(STRING(36))","policy(STRING(36))","objectId(STRING_ID)","ownerId(STRING(36))","created(DATETIME)","updated(DATETIME)"
+"DEBUG","%d | %c | %5p | %m%n","Global logger","DATE-BASED","661485D8-0730-7EE9-FF18-17FBD9063900",null,"Tue Jul 24 20:01:35 UTC 2018",null

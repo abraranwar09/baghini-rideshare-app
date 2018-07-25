@@ -1,0 +1,1 @@
+"email(STRING(36))","name(STRING(36))","password(STRING(36))","objectId(STRING_ID)","ownerId(STRING(36))","created(DATETIME)","updated(DATETIME)","bckls__userTypeId(INT)","bckls__socialId(STRING(null))","bckls__displayName(STRING(null))"
