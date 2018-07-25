@@ -1,0 +1,1 @@
+"channelName(STRING(45))","deviceId(STRING(45))","deviceToken(STRING(256))","expiration(DATETIME)","operatingSystemName(STRING(15))","operatingSystemVersion(STRING(45))","objectId(STRING_ID)","ownerId(STRING(36))","created(DATETIME)","updated(DATETIME)","user__Users__bcklsFK__ONE_TO_ONE"
